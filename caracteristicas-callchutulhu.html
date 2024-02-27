@@ -1,0 +1,129 @@
+border-top: none; <!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tabla de Características</title>
+<style>
+    table {
+        width: 50%; /* Reduciendo el ancho de la tabla */
+        border-collapse: collapse;
+        border-spacing: 10px; /* Añadido para asegurar que no haya espaciado entre las celdas */
+    }
+
+    th, td {
+        
+        background-color: rgb(170, 136, 85);
+        
+        text-align: center;
+        padding: 8px;
+    }
+
+    th {
+        
+    }
+
+    .invisible-input {
+        border: none;
+        background: none;
+        outline: none;
+        text-align: center;
+        width: 100%;
+    }
+  td.caracteristica_name{
+    background-color: transparent;
+  }
+
+    /* Agregando bordes redondeados a las características */
+    td.rounded-top-right {
+        border-top: none;  
+     
+      
+        border-top-right-radius: 50px;
+        /*border: none;  Eliminando los bordes de las celdas */
+    }
+</style>
+</head>
+<body>
+
+<table>
+    <thead>
+        <tr>
+            <th colspan = "9">Características</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td rowspan="2"  class="caracteristica_name" >FUE </td>
+            <td rowspan = 2><input type="number" class="invisible-input" id="fueTotal" value="0" oninput="updateValues('fue')"></td>
+            <td id="fueMitad" class="rounded-top-right" >0</td>
+            <td rowspan="2" class="caracteristica_name">DES</td>
+            <td rowspan = 2 ><input type="number" class="invisible-input" id="desTotal" value="0" oninput="updateValues('des')"></td>
+            <td id="desMitad" class="rounded-top-right" >0</td>
+            <td rowspan="2" class="caracteristica_name">POD</td>
+            <td rowspan = 2><input type="number" class="invisible-input" id="podTotal" value="0" oninput="updateValues('pod')"></td>
+            <td id="podMitad" class="rounded-top-right" >0</td>
+        </tr>
+      <tr>
+        <td id="fueQuinta" >0</td>
+        <td id="desQuinta">0</td>
+        <td id="podQuinta">0</td>
+      </tr>
+        <tr>
+            <td rowspan="2" class="caracteristica_name">CON</td>
+            <td rowspan="2"><input type="number" class="invisible-input" id="conTotal" value="0" oninput="updateValues('con')"></td>
+            <td id="conMitad" class="rounded-top-right">0</td>
+            <td rowspan="2" class="caracteristica_name">APA</td>
+            <td rowspan="2"><input type="number" class="invisible-input" id="apaTotal" value="0" oninput="updateValues('apa')"></td>
+            <td id="apaMitad" class="rounded-top-right">0</td>
+            <td rowspan="2" class="caracteristica_name">EDU</td>
+            <td rowspan="2"><input type="number" class="invisible-input" id="eduTotal" value="0" oninput="updateValues('edu')"></td>
+            <td id="eduMitad" class="rounded-top-right" >0</td>
+        </tr>
+        <tr>
+          <td id="conQuinta">0</td>
+          <td id="apaQuinta">0</td>
+          <td id="eduQuinta">0</td>
+        </tr>
+        <tr>
+            <td rowspan="2" class="caracteristica_name">TAM</td>
+            <td  rowspan="2"><input type="number" class="invisible-input" id="tamTotal" value="0" oninput="updateValues('tam')"></td>
+            <td id="tamMitad" class="rounded-top-right">0</td>
+            <td rowspan="2" class="caracteristica_name">INT</td>
+            <td rowspan="2"><input type="number" class="invisible-input" id="intTotal" value="0" oninput="updateValues('int')"></td>
+            <td id="intMitad" class="rounded-top-right">0</td>
+            <td rowspan="2" class="caracteristica_name" >Mov</td>
+            <td rowspan="2"><input type="number" class="invisible-input" id="movTotal" value="0" oninput="updateValues('mov')"></td>
+            <td id="movMitad" class="rounded-top-right">0</td>
+        </tr>
+        <tr>
+          <td id="tamQuinta">0</td>
+          <td id="intQuinta">0</td>
+          <td id="movQuinta">0</td>
+        </tr>
+    </tbody>
+</table>
+
+
+<script>
+    function updateValues(characteristic) {
+        var total = parseInt(document.getElementById(characteristic + 'Total').value);
+        if (characteristic === 'mov') {
+          var mitad = Math.floor(total + 1) 
+          var quinta = Math.floor(total -1)         
+        }else{
+          var mitad = Math.floor(total / 2) 
+          var quinta = Math.floor(total / 5)
+        }
+        // Actualizar valores de Mitad
+        var mitadElement = document.querySelector('td#' + characteristic + 'Mitad');
+        mitadElement.textContent = mitad;
+        
+        // Actualizar valores de Quinta parte
+        var quintaElement = document.querySelector('td#' + characteristic + 'Quinta');
+        quintaElement.textContent = quinta;
+    }
+</script>
+
+</body>
+</html>
