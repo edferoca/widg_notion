@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contador</title>
+</head>
+<body>
+    <h1>Contador</h1>
+    <p>Valor del contador: <span id="counter">0</span></p>
+    <button id="increaseBtn">Aumentar</button>
+    <button id="decreaseBtn">Disminuir</button>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const counterElement = document.getElementById('counter');
+            const increaseButton = document.getElementById('increaseBtn');
+            const decreaseButton = document.getElementById('decreaseBtn');
+
+            // Función para aumentar el contador
+            function increaseCounter() {
+                let count = parseInt(localStorage.getItem('counter')) || 0;
+                count++;
+                localStorage.setItem('counter', count);
+                counterElement.textContent = count;
+            }
+
+            // Función para disminuir el contador
+            function decreaseCounter() {
+                let count = parseInt(localStorage.getItem('counter')) || 0;
+                if (count > 0) {
+                    count--;
+                    localStorage.setItem('counter', count);
+                    counterElement.textContent = count;
+                }
+            }
+
+            // Manejadores de eventos para los botones
+            increaseButton.addEventListener('click', increaseCounter);
+            decreaseButton.addEventListener('click', decreaseCounter);
+
+            // Recuperar y mostrar el valor del contador al cargar la página
+            let count = parseInt(localStorage.getItem('counter')) || 0;
+            counterElement.textContent = count;
+        });
+    </script>
+</body>
+</html>
