@@ -23,13 +23,6 @@
         margin-bottom: 20px;
     }
     
-    audio {
-        margin: 0 auto;
-        display: block;
-        width: 80%;
-        max-width: 500px;
-    }
-    
     .button {
         background-color: #1d3557; /* Azul más claro */
         color: white;
@@ -47,7 +40,7 @@
 </style>
 </head>
 <body>
-
+<h1>Reproductor de Audio</h1>
 
 <div id="audio-controls">
     <button class="button" id="play-pause">&#9658;</button>
@@ -56,58 +49,57 @@
 
 <input type="text" id="audio-name" readonly>
 
-<audio id="audio" controls loop>
-    <source src="tu_archivo.mp3" type="audio/mpeg">
+
+<audio class="audio" controls loop>
+    <source src="demonic-woman-scream-6333.mp3" type="audio/mpeg">
+    Tu navegador no soporta la etiqueta de audio.
+</audio>
+<audio class="audio" controls loop>
+    <source src="high-quality-monster-screech-65012.mp3" type="audio/mpeg">
     Tu navegador no soporta la etiqueta de audio.
 </audio>
 
 <script>
-    const audio = document.getElementById('audio');
+    const audios = document.querySelectorAll('.audio');
     const playPauseButton = document.getElementById('play-pause');
     const stopButton = document.getElementById('stop');
     const audioName = document.getElementById('audio-name');
 
-    // Lista de archivos de audio
-    const audioFiles = ['audio1.mp3', 'audio2.mp3', 'audio3.mp3']; // Puedes añadir más archivos aquí
-
-    let currentAudioIndex = 0;
+    let isPlaying = false;
 
     // Reproducir o pausar audio
     playPauseButton.addEventListener('click', function() {
-        if (audio.paused) {
-            audio.play();
+        if (!isPlaying) {
+            audios.forEach(audio => audio.play());
             playPauseButton.innerHTML = '&#10074;&#10074;'; // Icono de pausa
+            isPlaying = true;
         } else {
-            audio.pause();
+            audios.forEach(audio => audio.pause());
             playPauseButton.innerHTML = '&#9658;'; // Icono de reproducir
+            isPlaying = false;
         }
     });
 
     // Detener audio
     stopButton.addEventListener('click', function() {
-        audio.pause();
-        audio.currentTime = 0;
+        audios.forEach(audio => {
+            audio.pause();
+            audio.currentTime = 0;
+        });
         playPauseButton.innerHTML = '&#9658;'; // Icono de reproducir
+        isPlaying = false;
     });
 
     // Actualizar nombre del archivo de audio
-    audio.addEventListener('play', updateAudioName);
-    audio.addEventListener('pause', updateAudioName);
-    audio.addEventListener('ended', updateAudioName);
-
-    function updateAudioName() {
-        audioName.value = audioFiles[currentAudioIndex];
-    }
-
-    // Cambiar el archivo de audio cuando termina el actual
-    audio.addEventListener('ended', function() {
-        currentAudioIndex = (currentAudioIndex + 1) % audioFiles.length;
-        audio.src = audioFiles[currentAudioIndex];
-        audio.play();
+    audios.forEach(audio => {
+        audio.addEventListener('play', updateAudioName);
+        audio.addEventListener('pause', updateAudioName);
+        audio.addEventListener('ended', updateAudioName);
     });
 
-    // Mostrar el nombre del primer archivo de audio
-    updateAudioName();
+    function updateAudioName() {
+        audioName.value = Array.from(audios).map(audio => audio.src.split('/').pop()).join(', ');
+    }
 </script>
 
 </body>
