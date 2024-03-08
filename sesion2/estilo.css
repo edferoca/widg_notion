@@ -1,0 +1,38 @@
+body {
+    background-color: #121d33; /* Azul oscuro */
+    color: white;
+    font-family: Arial, sans-serif;
+    text-align: center;
+}
+
+.audio-controls {
+    display: none; /* Ocultar los controles de audio al principio */
+}
+
+.button {
+    background-color: #1d3557; /* Azul más claro */
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    font-size: 1.2rem;
+    cursor: pointer;
+    margin: 0 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.controls-container {
+    background-color: #1d3557; /* Color más claro para la región */
+    padding: 20px; /* Añadir un poco de espacio alrededor de los controles */
+    border-radius: 10px; /* Añadir esquinas redondeadas */
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centrar elementos horizontalmente */
+    margin-bottom: 20px;
+}
+
+.button.play-pause {
+    margin: 10px 0; /* Añadir espacio arriba y abajo para separar el botón de los otros elementos */
+}
